@@ -4,7 +4,7 @@ VALUES ('27ae3db1-00ce-43a1-a016-ce280c28c339', 'Trainee'),
        ('77745df7-8308-4483-b3ad-c59aa994a154', 'Middle'),
        ('f260a755-e454-4803-bf9f-de30de56679b', 'Senior');
 
-INSERT INTO _language (language_id, language_name)
+INSERT INTO languages (language_id, language_name)
 VALUES ('bd7894f9-3e2d-4847-adc4-1e1840910bb2', 'JavaScript'),
        ('b91a0501-56a4-46d4-b184-9380764ddac3', 'Python'),
        ('b40e2a0f-0755-4783-81f0-3d6c8d1db8fa', 'Go'),

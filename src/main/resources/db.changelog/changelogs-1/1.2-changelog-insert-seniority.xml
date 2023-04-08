@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="3" author="Karyna">
+        <sql dbms="postgresql"
+             endDelimiter=";"
+             splitStatements="true"
+             stripComments="true">
+            INSERT INTO seniority (seniority_id, seniority_name)
+            VALUES ('27ae3db1-00ce-43a1-a016-ce280c28c339', 'Trainee'),
+                   ('fb3e95c6-6c54-4673-b9ce-89a1fc188201', 'Junior'),
+                   ('77745df7-8308-4483-b3ad-c59aa994a154', 'Middle'),
+                   ('f260a755-e454-4803-bf9f-de30de56679b', 'Senior');
+        </sql>
+        <rollback>
+            <sql dbms="postgresql"
+                 endDelimiter=";"
+                 splitStatements="true"
+                 stripComments="true">
+                DELETE FROM seniority WHERE seniority_id IN
+                ('27ae3db1-00ce-43a1-a016-ce280c28c339', 'fb3e95c6-6c54-4673-b9ce-89a1fc188201',
+                '77745df7-8308-4483-b3ad-c59aa994a154', 'f260a755-e454-4803-bf9f-de30de56679b');
+            </sql>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>
