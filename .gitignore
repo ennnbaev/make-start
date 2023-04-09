@@ -1,0 +1,15 @@
+target/
+!src/main/**
+!src/test/**
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### Project's Files ###
+
+build_tools
+*.log
+/src/test/resources/fill-table-location.sql
