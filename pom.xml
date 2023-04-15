@@ -33,6 +33,7 @@
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
+			<version>4.20.0</version>
 		</dependency>
 
 		<dependency>
@@ -50,12 +51,17 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-        <dependency>
-            <groupId>postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>9.1-901-1.jdbc4</version>
-        </dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>42.5.4</version>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>1.18.0</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -87,9 +93,9 @@
 				<dependencies>
 					<!--set up any dependencies for Liquibase to function in your environment for example, a database-specific plugin-->
 					<dependency>
-						<groupId>postgresql</groupId>
+						<groupId>org.postgresql</groupId>
 						<artifactId>postgresql</artifactId>
-						<version>9.1-901-1.jdbc4</version>
+						<version>42.5.4</version>
 					</dependency>
 				</dependencies>
 			</plugin>
