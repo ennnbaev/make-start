@@ -15,6 +15,9 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
+		<liquibase.version>4.20.0</liquibase.version>
+		<postgresql.version>42.5.4</postgresql.version>
+		<testcontainers.version>1.18.0</testcontainers.version>
 	</properties>
 
 	<dependencies>
@@ -33,7 +36,7 @@
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
-			<version>4.20.0</version>
+			<version>${liquibase.version}</version>
 		</dependency>
 
 		<dependency>
@@ -54,12 +57,12 @@
 		<dependency>
 			<groupId>org.postgresql</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>42.5.4</version>
+			<version>${postgresql.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.testcontainers</groupId>
 			<artifactId>postgresql</artifactId>
-			<version>1.18.0</version>
+			<version>${testcontainers.version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
@@ -84,7 +87,7 @@
                 include <groupId>, <artifactID>, and <version> elements-->
 				<groupId>org.liquibase</groupId>
 				<artifactId>liquibase-maven-plugin</artifactId>
-				<version>4.20.0</version>
+				<version>${liquibase.version}</version>
 				<configuration>
 					<!--set values for Liquibase properties and settings
                     for example, the location of a properties file to use-->
@@ -95,7 +98,7 @@
 					<dependency>
 						<groupId>org.postgresql</groupId>
 						<artifactId>postgresql</artifactId>
-						<version>42.5.4</version>
+						<version>${postgresql.version}</version>
 					</dependency>
 				</dependencies>
 			</plugin>
