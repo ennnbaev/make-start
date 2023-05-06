@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="3" author="Karyna">
+        <sql dbms="postgresql"
+             endDelimiter=";"
+             splitStatements="true"
+             stripComments="true">
+            ALTER TABLE users DROP CONSTRAINT FK_USER_PROJECT;
+            ALTER TABLE users DROP COLUMN project_id;
+            ALTER TABLE project ADD owner_id varchar(255);
+            ALTER TABLE project ADD CONSTRAINT FK_PROJECT_USERS FOREIGN KEY (owner_id) REFERENCES users(user_id);
+        </sql>
+        <rollback>
+            <sql dbms="postgresql"
+                 endDelimiter=";"
+                 splitStatements="true"
+                 stripComments="true">
+                ALTER TABLE project DROP CONSTRAINT FK_PROJECT_USERS;
+                ALTER TABLE project DROP COLUMN owner_id;
+                ALTER TABLE users ADD project_id;
+                ALTER TABLE users ADD CONSTRAINT FK_USER_PROJECT FOREIGN KEY (project_id) REFERENCES project(project_id);
+            </sql>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

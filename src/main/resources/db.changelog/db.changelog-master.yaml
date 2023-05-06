@@ -5,3 +5,5 @@ databaseChangeLog:
       file: db.changelog/changelogs-1/1.1-changelog-insert-languages.xml
   - include:
       file: db.changelog/changelogs-1/1.2-changelog-insert-seniority.xml
+  - include:
+    - file: db.changelog/changelogs-2/2.1-changelog-update-project-user-relationship.xml
