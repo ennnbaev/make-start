@@ -15,7 +15,11 @@
 	<description>Demo project for Spring Boot</description>
 	<properties>
 		<java.version>17</java.version>
+		<liquibase.version>4.20.0</liquibase.version>
+		<postgresql.version>42.5.4</postgresql.version>
+		<testcontainers.version>1.18.0</testcontainers.version>
 	</properties>
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -32,6 +36,7 @@
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
+			<version>${liquibase.version}</version>
 		</dependency>
 
 		<dependency>
@@ -49,6 +54,17 @@
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${postgresql.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.testcontainers</groupId>
+			<artifactId>postgresql</artifactId>
+			<version>${testcontainers.version}</version>
+			<scope>test</scope>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -56,6 +72,7 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<version>${project.parent.version}</version>
 				<configuration>
 					<excludes>
 						<exclude>
@@ -64,6 +81,26 @@
 						</exclude>
 					</excludes>
 				</configuration>
+			</plugin>
+			<plugin>
+				<!--start with basic information to get Liquibase plugin:
+                include <groupId>, <artifactID>, and <version> elements-->
+				<groupId>org.liquibase</groupId>
+				<artifactId>liquibase-maven-plugin</artifactId>
+				<version>${liquibase.version}</version>
+				<configuration>
+					<!--set values for Liquibase properties and settings
+                    for example, the location of a properties file to use-->
+					<propertyFile>liquibase.properties</propertyFile>
+				</configuration>
+				<dependencies>
+					<!--set up any dependencies for Liquibase to function in your environment for example, a database-specific plugin-->
+					<dependency>
+						<groupId>org.postgresql</groupId>
+						<artifactId>postgresql</artifactId>
+						<version>${postgresql.version}</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 	</build>
