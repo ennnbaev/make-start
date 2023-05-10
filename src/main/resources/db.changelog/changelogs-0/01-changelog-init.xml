@@ -11,5 +11,11 @@
             <sqlFile path="db.changelog/changelogs-0/01-drop-tables.sql"/>
         </rollback>
     </changeSet>
-
+    <changeSet id="addColumnsToUserTable" author="Yenbaiev">
+        <addColumn tableName="users">
+            <column name="password" type="varchar(255)"/>
+            <column name="username" type="varchar(255)"/>
+            <column name="email" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
 </databaseChangeLog>
