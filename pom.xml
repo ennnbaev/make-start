@@ -19,6 +19,8 @@
 		<postgresql.version>42.5.4</postgresql.version>
 		<testcontainers.version>1.18.0</testcontainers.version>
 		<security.version>5.7.4</security.version>
+		<starter.version>2.4.2</starter.version>
+		<servlet.version>4.0.1</servlet.version>
 	</properties>
 
 	<dependencies>
@@ -39,13 +41,19 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
+			<version>${starter.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.liquibase</groupId>
 			<artifactId>liquibase-core</artifactId>
 			<version>${liquibase.version}</version>
 		</dependency>
-
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>${servlet.version}</version>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
