@@ -11,9 +11,8 @@ import java.util.UUID;
 @Entity
 public class Users {
     @Id
-    @GeneratedValue
     @Column(name = "user_id")
-    private UUID id;
+    private String id = UUID.randomUUID().toString();
     @Column(name = "first_name")
     private String firstName;
     @Column(name = "last_name")
@@ -31,5 +30,6 @@ public class Users {
     private Cv cv;
     @OneToMany(mappedBy = "owner")
     private List<Project> projects;
+
 
 }
