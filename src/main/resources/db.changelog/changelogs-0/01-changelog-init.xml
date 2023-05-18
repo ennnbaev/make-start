@@ -17,10 +17,10 @@
                 <constraints nullable="false"/>
             </column>
             <column name="username" type="varchar(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
             <column name="email" type="varchar(255)">
-                <constraints nullable="false"/>
+                <constraints nullable="false" unique="true"/>
             </column>
         </addColumn>
     </changeSet>
