@@ -6,7 +6,7 @@ import jakarta.validation.constraints.*;
 import ua.nure.makestart.util.PatternHandler;
 
 @Data
-public class UserDto {
+public class UserRegistrationDto {
     @Schema(example = "Dmytro")
     @NotEmpty
     @Size(min = 2, max = 50)
