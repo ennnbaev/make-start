@@ -7,7 +7,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ua.nure.makestart.dto.UserDto;
+import ua.nure.makestart.dto.CvCreationDto;
+import ua.nure.makestart.dto.UserInfoDto;
+import ua.nure.makestart.dto.UserRegistrationDto;
 import ua.nure.makestart.service.UserService;
 
 @RestController
@@ -24,8 +26,19 @@ public class UserController {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "400", description = "BAD REQUEST")})
     @ResponseStatus(HttpStatus.OK)
-    public UserDto getUserInfo(@PathVariable String username) {
+    public UserInfoDto getUserInfo(@PathVariable String username) {
         return userService.getUserInfo(username);
+    }
+
+    @PostMapping("cv")
+    @Operation(summary = "Create or update a Cv")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "CREATED"),
+            @ApiResponse(responseCode = "400", description = "BAD REQUEST")})
+    @ResponseStatus(HttpStatus.CREATED)
+    public void createCv(@RequestBody CvCreationDto cvCreationDto) {
+
+        userService.createCv(cvCreationDto);
     }
 
     @PostMapping
@@ -36,8 +49,8 @@ public class UserController {
             @ApiResponse(responseCode = "409", description = "The user is with such email is already registered")
     })
     @ResponseStatus(HttpStatus.CREATED)
-    public void createUser(@RequestBody UserDto userDto) {
-        userService.createUser(userDto);
+    public void createUser(@RequestBody UserRegistrationDto userRegistrationDto) {
+        userService.createUser(userRegistrationDto);
     }
 
 }

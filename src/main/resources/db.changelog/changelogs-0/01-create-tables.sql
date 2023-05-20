@@ -37,9 +37,9 @@ CREATE TABLE users (
 
 CREATE TABLE cv (
     cv_id varchar(255) NOT NULL,
-    user_id varchar(255) NOT NULL,
     seniority_id varchar(255) NOT NULL,
     description varchar(255),
+    experience_years int NOT NULL,
     PRIMARY KEY (cv_id)
 );
 
@@ -77,7 +77,6 @@ ALTER TABLE project ADD CONSTRAINT FK_TEAM_PROJECT FOREIGN KEY (team_id) REFEREN
 ALTER TABLE users ADD CONSTRAINT FK_USER_CV FOREIGN KEY (cv_id) REFERENCES cv(cv_id);
 ALTER TABLE users ADD CONSTRAINT FK_USER_PROJECT FOREIGN KEY (project_id) REFERENCES project(project_id);
 
-ALTER TABLE cv ADD CONSTRAINT FK_CV_USER FOREIGN KEY (user_id) REFERENCES users(user_id);
 ALTER TABLE cv ADD CONSTRAINT FK_CV_SENIORITY FOREIGN KEY (seniority_id) REFERENCES seniority(seniority_id);
 
 ALTER TABLE positions ADD CONSTRAINT FK_POSITION_PROJECT FOREIGN KEY (project_id) REFERENCES project(project_id);

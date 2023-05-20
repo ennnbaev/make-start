@@ -25,7 +25,7 @@ public class Users {
     private String username;
     @Column
     private String email;
-    @OneToOne(cascade = CascadeType.MERGE)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "cv_id")
     private Cv cv;
     @OneToMany(mappedBy = "owner")
