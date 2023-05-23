@@ -11,9 +11,9 @@ public class Project {
     @Id
     @GeneratedValue
     @Column(name = "project_id")
-    private UUID id;
+    private String id = UUID.randomUUID().toString();
     @Column(name = "project_name")
-    private String name;
+    private String projectName;
     @Column
     private String description;
     @Column
