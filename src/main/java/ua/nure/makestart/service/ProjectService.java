@@ -10,4 +10,9 @@ public interface ProjectService {
     void save(String username, ProjectDto projectDto);
 
     List<ProjectDto> findRandomNProjects(int size);
+
+    boolean isUserHasProjectByProjectNameAndUsername(String projectName, String username);
+
+    void deleteProjectByProjectName(String projectName);
+
 }

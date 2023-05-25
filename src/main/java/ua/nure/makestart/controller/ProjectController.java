@@ -43,4 +43,17 @@ public class ProjectController {
         return projectService.findRandomNProjects(size);
     }
 
+    @DeleteMapping
+    @Operation(summary = "Delete an existed project")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "400", description = "BAD REQUEST")})
+    @ResponseStatus(HttpStatus.OK)
+    public void deleteProject(@Parameter @RequestParam String ownerUsername,
+                              @Parameter @RequestParam String projectName) {
+        if (!projectService.isUserHasProjectByProjectNameAndUsername(projectName, ownerUsername)) {
+            throw new UnsupportedOperationException("You cannot delete not yours project");
+        }
+        projectService.deleteProjectByProjectName(projectName);
+    }
 }
