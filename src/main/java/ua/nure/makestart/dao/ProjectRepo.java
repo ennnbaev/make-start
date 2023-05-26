@@ -12,14 +12,18 @@ import ua.nure.makestart.model.Project;
 import java.util.UUID;
 
 @Repository
+@Transactional
 public interface ProjectRepo extends CrudRepository<Project, UUID> {
-    @Transactional
     @Modifying
     @Query(nativeQuery = true, value = "insert into Project values (:id,:projectName,:description,null,:price," +
             "(select user_id from users where username = :username))")
     void saveProjectByUsername(String id, String projectName, String description, double price, String username);
 
     Page<Project> findAll(Pageable pageable);
+
+    void deleteByProjectName(String projectName);
+
+    boolean existsByProjectNameAndOwner_Username(String projectName, String username);
 
     default void saveProjectByUsername(String username, Project project) {
         this.saveProjectByUsername(project.getId(), project.getProjectName(), project.getDescription(), project.getPrice(), username);

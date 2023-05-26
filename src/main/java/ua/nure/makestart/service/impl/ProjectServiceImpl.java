@@ -32,4 +32,14 @@ public class ProjectServiceImpl implements ProjectService {
 
         return projectMapper.toDtoList(projectRepo.findAll(PageRequest.of(page, size)).getContent());
     }
+
+    @Override
+    public boolean isUserHasProjectByProjectNameAndUsername(String projectName, String username) {
+        return projectRepo.existsByProjectNameAndOwner_Username(projectName, username);
+    }
+
+    @Override
+    public void deleteProjectByProjectName(String projectName) {
+        projectRepo.deleteByProjectName(projectName);
+    }
 }
