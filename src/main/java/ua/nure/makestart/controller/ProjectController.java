@@ -14,6 +14,7 @@ import ua.nure.makestart.service.ProjectService;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "Project")

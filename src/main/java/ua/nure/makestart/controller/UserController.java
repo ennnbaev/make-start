@@ -12,6 +12,7 @@ import ua.nure.makestart.dto.UserInfoDto;
 import ua.nure.makestart.dto.UserRegistrationDto;
 import ua.nure.makestart.service.UserService;
 
+@CrossOrigin
 @RestController
 @RequiredArgsConstructor
 @Tag(name = "User")
