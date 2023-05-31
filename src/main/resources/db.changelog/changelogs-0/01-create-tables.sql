@@ -48,7 +48,7 @@ CREATE TABLE positions (
     project_id varchar(255) NOT NULL,
     seniority_id varchar(255) NOT NULL,
     position_status varchar(255),
-    user_id varchar(255),
+    experience_years int NOT NULL,
     PRIMARY KEY (position_id)
 );
 
@@ -81,7 +81,6 @@ ALTER TABLE cv ADD CONSTRAINT FK_CV_SENIORITY FOREIGN KEY (seniority_id) REFEREN
 
 ALTER TABLE positions ADD CONSTRAINT FK_POSITION_PROJECT FOREIGN KEY (project_id) REFERENCES project(project_id);
 ALTER TABLE positions ADD CONSTRAINT FK_POSITION_SENIORITY FOREIGN KEY (seniority_id) REFERENCES seniority(seniority_id);
-ALTER TABLE positions ADD CONSTRAINT FK_POSITION_USER FOREIGN KEY (user_id) REFERENCES users(user_id);
 
 -- defining foreign keys for many-to-many relationships
 ALTER TABLE language_position ADD CONSTRAINT FK_LANG_POS_LANGUAGE FOREIGN KEY (language_id) REFERENCES languages(language_id);

@@ -28,4 +28,6 @@ public interface ProjectRepo extends CrudRepository<Project, UUID> {
     default void saveProjectByUsername(String username, Project project) {
         this.saveProjectByUsername(project.getId(), project.getProjectName(), project.getDescription(), project.getPrice(), username);
     }
+
+    Project getProjectsByProjectName(String projectName);
 }

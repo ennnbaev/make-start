@@ -2,6 +2,7 @@ package ua.nure.makestart.service;
 
 import org.springframework.stereotype.Service;
 import ua.nure.makestart.dto.ProjectDto;
+import ua.nure.makestart.model.Project;
 
 import java.util.List;
 
@@ -14,5 +15,7 @@ public interface ProjectService {
     boolean isUserHasProjectByProjectNameAndUsername(String projectName, String username);
 
     void deleteProjectByProjectName(String projectName);
+
+    Project getProjectByName(String projectName);
 
 }

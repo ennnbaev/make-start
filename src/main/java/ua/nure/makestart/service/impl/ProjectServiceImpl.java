@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import ua.nure.makestart.dao.ProjectRepo;
 import ua.nure.makestart.dto.ProjectDto;
 import ua.nure.makestart.mapper.ProjectMapper;
+import ua.nure.makestart.model.Project;
 import ua.nure.makestart.service.ProjectService;
 
 import java.util.List;
@@ -41,5 +42,10 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void deleteProjectByProjectName(String projectName) {
         projectRepo.deleteByProjectName(projectName);
+    }
+
+    @Override
+    public Project getProjectByName(String projectName) {
+        return projectRepo.getProjectsByProjectName(projectName);
     }
 }
