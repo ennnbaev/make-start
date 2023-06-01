@@ -48,4 +48,9 @@ public class ProjectServiceImpl implements ProjectService {
     public Project getProjectByName(String projectName) {
         return projectRepo.getProjectsByProjectName(projectName);
     }
+
+    @Override
+    public void updateProject(Project project) {
+        projectRepo.save(project);
+    }
 }

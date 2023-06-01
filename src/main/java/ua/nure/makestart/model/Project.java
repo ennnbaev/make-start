@@ -9,7 +9,6 @@ import java.util.UUID;
 @Entity
 public class Project {
     @Id
-    @GeneratedValue
     @Column(name = "project_id")
     private String id = UUID.randomUUID().toString();
     @Column(name = "project_name")
@@ -18,9 +17,11 @@ public class Project {
     private String description;
     @Column
     private double price;
+    @OneToOne(cascade = CascadeType.MERGE)
+    @JoinColumn(name = "team_id")
+    private Team team;
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "owner_id")
     private Users owner;
-
 
 }

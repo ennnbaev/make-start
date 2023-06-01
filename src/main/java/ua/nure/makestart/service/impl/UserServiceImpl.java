@@ -13,6 +13,7 @@ import ua.nure.makestart.model.Cv;
 import ua.nure.makestart.model.Users;
 import ua.nure.makestart.service.UserService;
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,7 +27,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserInfoDto getUserInfo(String username) {
-        return userMapper.toUserInfoDto(userRepo.findUsersByUsername(username));
+        return userMapper.toUserInfoDto(userRepo.findUsersByUsername(username).orElseThrow());
     }
 
     @Override
@@ -36,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createCv(CvCreationDto cvCreationDto) {
-        Users user = userRepo.findUsersByUsername(cvCreationDto.getUsername());
+        Users user = userRepo.findUsersByUsername(cvCreationDto.getUsername()).orElseThrow();
         Cv cv = user.getCv();
         if (cv == null) {
             cv = new Cv();
@@ -48,5 +49,10 @@ public class UserServiceImpl implements UserService {
         cv.setExperienceYears(cvCreationDto.getExperienceYears());
         user.setCv(cv);
         userRepo.save(user);
+    }
+
+    @Override
+    public Optional<Users> getUserByUsername(String username) {
+        return userRepo.findUsersByUsername(username);
     }
 }
