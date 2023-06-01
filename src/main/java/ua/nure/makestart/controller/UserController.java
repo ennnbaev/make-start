@@ -9,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ua.nure.makestart.dto.CvCreationDto;
 import ua.nure.makestart.dto.UserInfoDto;
-import ua.nure.makestart.dto.UserRegistrationDto;
 import ua.nure.makestart.service.UserService;
 
 @CrossOrigin
@@ -42,16 +41,5 @@ public class UserController {
         userService.createCv(cvCreationDto);
     }
 
-    @PostMapping
-    @Operation(summary = "Create a new user")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "CREATED"),
-            @ApiResponse(responseCode = "400", description = "BAD REQUEST"),
-            @ApiResponse(responseCode = "409", description = "The user is with such email is already registered")
-    })
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createUser(@RequestBody UserRegistrationDto userRegistrationDto) {
-        userService.createUser(userRegistrationDto);
-    }
 
 }
