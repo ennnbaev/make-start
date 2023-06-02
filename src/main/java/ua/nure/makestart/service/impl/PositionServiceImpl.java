@@ -24,7 +24,7 @@ public class PositionServiceImpl implements PositionService {
     public void addPositionToProject(Project project, PositionDto positionDto) {
         Position position = new Position();
         position.setExperienceYears(positionDto.getExperienceYears());
-        position.setSeniority(seniorityRepo.findSeniorityByName(positionDto.getSeniority()));
+        position.setSeniority(seniorityRepo.findSeniorityByName(positionDto.getSeniority().getName()));
         position.setLanguages(positionDto.getLanguages().stream().map(x -> languageRepo.findLanguagesByLanguageName(x.getLanguageName()))
                 .collect(Collectors.toSet()));
         position.setProject(project);
