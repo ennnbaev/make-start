@@ -27,6 +27,4 @@ public class Users {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "cv_id")
     private Cv cv;
-
-
 }

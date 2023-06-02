@@ -19,9 +19,10 @@ public class Project {
     private double price;
     @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "team_id")
-    private Team team;
+    private Team team = new Team();
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "owner_id")
     private Users owner;
-
+    @OneToOne(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Position positions;
 }

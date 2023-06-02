@@ -7,7 +7,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class ProjectDto {
+public class ShortDetailProjectDto {
     @Schema(example = "Project")
     @NotEmpty
     @Size(min = 1, max = 20)
@@ -20,5 +20,6 @@ public class ProjectDto {
     @NotEmpty
     @PositiveOrZero
     private double price;
-
+    private int countOfTeammates;
+    private int countOfProposition;
 }

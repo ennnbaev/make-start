@@ -13,7 +13,7 @@ public class PositionDto {
     @Schema(example = "Trainee/Junior/Middle/Seniority")
     @NotEmpty
     @Size(min = 2, max = 10)
-    private String seniority;
+    private SeniorityDto seniority;
     @NotEmpty
     private String positionStatus;
     @Schema(example = "2")

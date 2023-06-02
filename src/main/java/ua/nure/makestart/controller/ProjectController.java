@@ -9,7 +9,9 @@ import jakarta.validation.constraints.PositiveOrZero;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import ua.nure.makestart.dto.ProjectDto;
+import ua.nure.makestart.dto.CreationProjectDto;
+import ua.nure.makestart.dto.DetailProjectDto;
+import ua.nure.makestart.dto.ShortDetailProjectDto;
 import ua.nure.makestart.service.ProjectService;
 
 import java.util.List;
@@ -30,8 +32,8 @@ public class ProjectController {
     })
     @ResponseStatus(HttpStatus.CREATED)
     public void createProject(@Parameter(name = "username", description = "Username of owner") @RequestParam String username,
-                              @RequestBody ProjectDto projectDto) {
-        projectService.save(username, projectDto);
+                              @RequestBody CreationProjectDto creationProjectDto) {
+        projectService.save(username, creationProjectDto);
     }
 
     @GetMapping
@@ -40,9 +42,40 @@ public class ProjectController {
             @ApiResponse(responseCode = "200", description = "OK"),
             @ApiResponse(responseCode = "400", description = "BAD REQUEST"),
             @ApiResponse(responseCode = "404", description = "NOT FOUND")})
-    public List<ProjectDto> findRandomNProjects(@Parameter @PositiveOrZero @RequestParam int size) {
+    public List<ShortDetailProjectDto> findRandomNProjects(@Parameter @PositiveOrZero @RequestParam int size) {
         return projectService.findRandomNProjects(size);
     }
+
+    @GetMapping("detail")
+    @Operation(summary = "Get details about project")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "400", description = "BAD REQUEST"),
+            @ApiResponse(responseCode = "404", description = "NOT FOUND")})
+    public DetailProjectDto getProjectDetails(@Parameter @RequestParam String projectName) {
+        return projectService.getProjectDetailsByProjectName(projectName);
+    }
+
+    @GetMapping("detail/my")
+    @Operation(summary = "Get details about my project")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "400", description = "BAD REQUEST"),
+            @ApiResponse(responseCode = "404", description = "NOT FOUND")})
+    public List<DetailProjectDto> getMyProjectDetails(@Parameter @RequestParam String ownerName) {
+        return projectService.getProjectDetailsByOwnerName(ownerName);
+    }
+
+    @GetMapping("detail/work")
+    @Operation(summary = "Get details about projects in which I work")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "OK"),
+            @ApiResponse(responseCode = "400", description = "BAD REQUEST"),
+            @ApiResponse(responseCode = "404", description = "NOT FOUND")})
+    public List<DetailProjectDto> getWorkProjectDetails(@Parameter @RequestParam String teammate) {
+        return projectService.getWorkProjectByTeammate(teammate);
+    }
+
 
     @DeleteMapping
     @Operation(summary = "Delete an existed project")
