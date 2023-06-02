@@ -2,6 +2,8 @@ package ua.nure.makestart.dto;
 
 import lombok.Data;
 
+import java.util.Set;
+
 @Data
 public class DetailProjectDto {
     private String projectName;
@@ -10,4 +12,5 @@ public class DetailProjectDto {
     private UserInfoDto owner;
     private PositionDto positions;
     private TeamDto team;
+    private Set <CvInfoDto> cv;
 }

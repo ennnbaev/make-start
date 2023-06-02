@@ -3,6 +3,7 @@ package ua.nure.makestart.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.util.Set;
 import java.util.UUID;
 
 @Data
@@ -25,4 +26,9 @@ public class Project {
     private Users owner;
     @OneToOne(mappedBy = "project", cascade = CascadeType.ALL, orphanRemoval = true)
     private Position positions;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "project_cv",
+            joinColumns = @JoinColumn(name = "project_id"),
+            inverseJoinColumns = @JoinColumn(name = "cv_id"))
+    private Set<Cv> cv;
 }
