@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="4" author="Karyna">
+        <sql dbms="postgresql"
+             endDelimiter=";"
+             splitStatements="true"
+             stripComments="true">
+            CREATE TABLE project_cv (
+                project_id varchar(255) NOT NULL,
+                cv_id varchar(255) NOT NULL,
+                PRIMARY KEY (project_id, cv_id)
+            );
+            ALTER TABLE project_cv ADD CONSTRAINT FK_PROJECT_CV_PROJECT FOREIGN KEY (project_id) REFERENCES project(project_id);
+            ALTER TABLE project_cv ADD CONSTRAINT FK_PROJECT_CV_CV FOREIGN KEY (cv_id) REFERENCES cv(cv_id);
+        </sql>
+
+        <rollback>
+            <sql dbms="postgresql"
+                 endDelimiter=";"
+                 splitStatements="true"
+                 stripComments="true">
+                ALTER TABLE project_cv DROP CONSTRAINT FK_PROJECT_CV_PROJECT;
+                ALTER TABLE project_cv DROP CONSTRAINT FK_PROJECT_CV_CV;
+                DROP TABLE project_cv;
+            </sql>
+        </rollback>
+    </changeSet>
+
+
+</databaseChangeLog>
