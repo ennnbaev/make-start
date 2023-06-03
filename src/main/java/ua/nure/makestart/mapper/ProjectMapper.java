@@ -9,7 +9,7 @@ import ua.nure.makestart.model.Project;
 
 import java.util.List;
 
-@Mapper(componentModel = "spring",uses = {TeamMapper.class, UserMapper.class, ProjectMapper.class, SeniorityMapper.class})
+@Mapper(componentModel = "spring", uses = {TeamMapper.class, UserMapper.class, ProjectMapper.class, SeniorityMapper.class, CvMapper.class})
 public interface ProjectMapper {
     CreationProjectDto toDto(Project project);
 
