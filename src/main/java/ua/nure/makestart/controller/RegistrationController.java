@@ -5,39 +5,42 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import ua.nure.makestart.dto.LoginDto;
 import ua.nure.makestart.dto.UserRegistrationDto;
 import ua.nure.makestart.service.UserService;
 
-@CrossOrigin
+import static org.springframework.security.web.context.HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY;
+
+@Slf4j
 @RestController
+@Tag(name = "Authorization")
 @RequiredArgsConstructor
-@Tag(name = "Auth")
-@RequestMapping("auth")
+@Validated
 public class RegistrationController {
 
     @Autowired
-    private AuthenticationManager authenticationManager;
-
     private final UserService userService;
 
-    @Bean
-    public AuthenticationManager authenticationManager(HttpSecurity http) throws Exception {
-        return http.getSharedObject(AuthenticationManagerBuilder.class)
-                .build();
 
+    private AuthenticationManager authenticationManager;
+
+    public void SignInController(AuthenticationManager authenticationManager, UserDetailsService userDetailsService) {
+        this.authenticationManager = authenticationManager;
     }
 
     @PostMapping
@@ -59,11 +62,13 @@ public class RegistrationController {
             @ApiResponse(responseCode = "400", description = "BAD REQUEST"),
             @ApiResponse(responseCode = "409", description = "You are already sign-in")
     })
-    public ResponseEntity<String> logIn(@RequestBody LoginDto loginDto) {
+    public ResponseEntity<String> logIn(@RequestBody LoginDto loginDto, HttpServletRequest req) {
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
                 loginDto.getUsername(), loginDto.getPassword()));
-
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+        SecurityContext sc = SecurityContextHolder.getContext();
+        sc.setAuthentication(authentication);
+        HttpSession session = req.getSession(true);
+        session.setAttribute(SPRING_SECURITY_CONTEXT_KEY, sc);
         return new ResponseEntity<>("User signed-in successfully!.", HttpStatus.OK);
     }
 

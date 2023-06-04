@@ -21,7 +21,6 @@
         <swagger.version>2.1.0</swagger.version>
         <postgresql.version>42.5.4</postgresql.version>
         <testcontainers.version>1.18.0</testcontainers.version>
-        <security.version>5.7.4</security.version>
         <starter.version>2.4.2</starter.version>
         <servlet.version>4.0.1</servlet.version>
         <spring.version>5.2.0.RELEASE</spring.version>
@@ -52,11 +51,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
@@ -95,17 +89,11 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-security</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
-            <version>${spring.version}</version>
         </dependency>
     </dependencies>
 
