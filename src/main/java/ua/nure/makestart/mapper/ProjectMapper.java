@@ -6,6 +6,7 @@ import ua.nure.makestart.dto.CreationProjectDto;
 import ua.nure.makestart.dto.DetailProjectDto;
 import ua.nure.makestart.dto.ShortDetailProjectDto;
 import ua.nure.makestart.model.Project;
+import ua.nure.makestart.model.Team;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
 public interface ProjectMapper {
     CreationProjectDto toDto(Project project);
 
-    @Mapping(target = "countOfTeammates", expression = "java(project.getTeam().getUsers().size())")
+    @Mapping(target = "countOfTeammates", expression = "java(getCountOfTeammates(project.getTeam()))")
     @Mapping(target = "countOfProposition", expression = "java(project.getPositions() != null ? project.getPositions().getLanguages().size() : 0)")
     ShortDetailProjectDto toShortDetailDto(Project project);
 
@@ -27,4 +28,10 @@ public interface ProjectMapper {
 
     List<ShortDetailProjectDto> toShortDetailDtoList(List<Project> project);
 
+    default int getCountOfTeammates(Team team) {
+        if (team != null && team.getUsers() != null) {
+            return team.getUsers().size();
+        }
+        return 0;
+    }
 }
