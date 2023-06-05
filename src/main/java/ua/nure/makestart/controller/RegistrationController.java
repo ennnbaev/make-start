@@ -33,15 +33,10 @@ import static org.springframework.security.web.context.HttpSessionSecurityContex
 @Validated
 public class RegistrationController {
 
-    @Autowired
+
     private final UserService userService;
 
-
     private AuthenticationManager authenticationManager;
-
-    public void SignInController(AuthenticationManager authenticationManager, UserDetailsService userDetailsService) {
-        this.authenticationManager = authenticationManager;
-    }
 
     @PostMapping
     @Operation(summary = "Create a new user")
