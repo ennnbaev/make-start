@@ -19,6 +19,7 @@ import ua.nure.makestart.model.Seniority;
 import ua.nure.makestart.model.Users;
 import ua.nure.makestart.service.impl.UserServiceImpl;
 
+import java.util.Optional;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
