@@ -10,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import ua.nure.makestart.dto.CvCreationDto;
 import ua.nure.makestart.dto.UserInfoDto;
-import ua.nure.makestart.dto.UserRegistrationDto;
 import ua.nure.makestart.model.Project;
 import ua.nure.makestart.model.Users;
 import ua.nure.makestart.service.ProjectService;
@@ -61,16 +60,16 @@ public class UserController {
         projectService.updateProject(project);
     }
 
-    @PostMapping
-    @Operation(summary = "Create a new user")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "CREATED"),
-            @ApiResponse(responseCode = "400", description = "BAD REQUEST"),
-            @ApiResponse(responseCode = "409", description = "The user is with such email is already registered")
-    })
-    @ResponseStatus(HttpStatus.CREATED)
-    public void createUser(@RequestBody UserRegistrationDto userRegistrationDto) {
-        userService.createUser(userRegistrationDto);
-    }
+//    @PostMapping
+//    @Operation(summary = "Create a new user")
+//    @ApiResponses(value = {
+//            @ApiResponse(responseCode = "201", description = "CREATED"),
+//            @ApiResponse(responseCode = "400", description = "BAD REQUEST"),
+//            @ApiResponse(responseCode = "409", description = "The user is with such email is already registered")
+//    })
+//    @ResponseStatus(HttpStatus.CREATED)
+//    public void createUser(@RequestBody UserRegistrationDto userRegistrationDto) {
+//        userService.createUser(userRegistrationDto);
+//    }
 
 }
