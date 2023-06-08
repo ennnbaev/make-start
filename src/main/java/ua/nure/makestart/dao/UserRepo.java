@@ -12,7 +12,4 @@ import java.util.UUID;
 public interface UserRepo extends CrudRepository<Users, UUID> {
     @Transactional
     Optional<Users> findUsersByUsername(String username);
-
-    @Transactional
-    Users findUsersByPassword(String password);
 }

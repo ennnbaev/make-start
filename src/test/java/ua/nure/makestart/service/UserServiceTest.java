@@ -56,7 +56,7 @@ class UserServiceTest {
         UserInfoDto expectedUserInfoDto = new UserInfoDto();
         expectedUserInfoDto.setUsername(username);
 
-        when(userRepo.findUsersByUsername(username)).thenReturn(user);
+        when(userRepo.findUsersByUsername(username)).thenReturn(Optional.of(user));
         when(userMapper.toUserInfoDto(user)).thenReturn(expectedUserInfoDto);
 
         // Вызов тестируемого метода
@@ -105,7 +105,7 @@ class UserServiceTest {
         user.setCv(cv);
 
         // Настройка поведения моков
-        when(userRepo.findUsersByUsername("username")).thenReturn(user);
+        when(userRepo.findUsersByUsername("username")).thenReturn(Optional.of(user));
         when(seniorityRepo.findSeniorityByName("Trainee")).thenReturn(seniority);
         when(languageRepo.findLanguagesByLanguageName("language1")).thenReturn(new Languages());
 
