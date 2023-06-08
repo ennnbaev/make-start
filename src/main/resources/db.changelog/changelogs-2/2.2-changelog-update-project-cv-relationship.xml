@@ -5,28 +5,31 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
                       http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="3" author="Karyna">
+    <changeSet id="4" author="Karyna">
         <sql dbms="postgresql"
              endDelimiter=";"
              splitStatements="true"
              stripComments="true">
-            ALTER TABLE users DROP CONSTRAINT FK_USER_PROJECT;
-            ALTER TABLE users DROP COLUMN project_id;
-            ALTER TABLE project ADD owner_id varchar(255);
-            ALTER TABLE project ADD CONSTRAINT FK_PROJECT_USERS FOREIGN KEY (owner_id) REFERENCES users(user_id);
+            CREATE TABLE project_cv (
+                project_id varchar(255) NOT NULL,
+                cv_id varchar(255) NOT NULL,
+                PRIMARY KEY (project_id, cv_id)
+            );
+            ALTER TABLE project_cv ADD CONSTRAINT FK_PROJECT_CV_PROJECT FOREIGN KEY (project_id) REFERENCES project(project_id);
+            ALTER TABLE project_cv ADD CONSTRAINT FK_PROJECT_CV_CV FOREIGN KEY (cv_id) REFERENCES cv(cv_id);
         </sql>
+
         <rollback>
             <sql dbms="postgresql"
                  endDelimiter=";"
                  splitStatements="true"
                  stripComments="true">
-                ALTER TABLE project DROP CONSTRAINT FK_PROJECT_USERS;
-                ALTER TABLE project DROP COLUMN owner_id;
-                ALTER TABLE users ADD project_id;
-                ALTER TABLE users ADD CONSTRAINT FK_USER_PROJECT FOREIGN KEY (project_id) REFERENCES project(project_id);
+                ALTER TABLE project_cv DROP CONSTRAINT FK_PROJECT_CV_PROJECT;
+                ALTER TABLE project_cv DROP CONSTRAINT FK_PROJECT_CV_CV;
+                DROP TABLE project_cv;
             </sql>
         </rollback>
     </changeSet>
 
-</databaseChangeLog>
 
+</databaseChangeLog>
