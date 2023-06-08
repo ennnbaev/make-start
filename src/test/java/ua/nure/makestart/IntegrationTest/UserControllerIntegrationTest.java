@@ -15,12 +15,11 @@ import java.nio.file.Paths;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UserControllerIntegrationTest {
+class UserControllerIntegrationTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -29,39 +28,28 @@ public class UserControllerIntegrationTest {
     private ObjectMapper objectMapper;
 
     @Test
-    public void testGetUserInfo() throws Exception {
-        String username = "example_username";
-
-        mockMvc.perform(get("/user/my-info/{username}", username))
-                .andExpect(status().isOk())
-                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
-                .andReturn();
-    }
-
-    @Test
-    public void testCreateCv() throws Exception {
-        byte[] jsonData = Files.readAllBytes(Paths.get("cv_creation.json"));
-        CvCreationDto cvCreationDto = objectMapper.readValue(jsonData, CvCreationDto.class);
-
-        mockMvc.perform(post("/user/cv")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(cvCreationDto)))
-                .andExpect(status().isCreated())
-                .andReturn();
-    }
-
-
-    @Test
-    public void testCreateUser() throws Exception {
-        byte[] jsonData = Files.readAllBytes(Paths.get("user_registration.json"));
+    void testCreateUser() throws Exception {
+        byte[] jsonData = Files.readAllBytes(Paths.get("src/test/java/ua/nure/makestart/IntegrationTest/user_registration.json"));
         UserRegistrationDto userRegistrationDto = objectMapper.readValue(jsonData, UserRegistrationDto.class);
 
         mockMvc.perform(post("/user")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userRegistrationDto)))
-                .andExpect(status().isCreated())
-                .andReturn();
+                .andExpect(status().isCreated());
 
+
+    }
+    @Test
+    void testGetUserInfo() throws Exception {
+        String username = "kyrilka";
+
+        mockMvc.perform(get("/user/my-info/{username}", username))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("firstName").value("Dmytro"))
+                .andExpect(jsonPath("$.lastName").value("Yenbaiev"))
+                .andExpect(jsonPath("$.age").value("40"))
+                .andExpect(jsonPath("$.username").value("kyrilka"))
+                .andExpect(jsonPath("$.email").value("exampple@icloud.com"));
 
     }
 }
