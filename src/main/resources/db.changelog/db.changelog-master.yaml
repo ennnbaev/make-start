@@ -6,4 +6,6 @@ databaseChangeLog:
   - include:
       file: db.changelog/changelogs-1/1.2-changelog-insert-seniority.xml
   - include:
-    - file: db.changelog/changelogs-2/2.1-changelog-update-project-user-relationship.xml
+      file: db.changelog/changelogs-2/2.1-changelog-update-project-user-relationship.xml
+  - include:
+      file: db.changelog/changelogs-2/2.2-changelog-update-project-cv-relationship.xml

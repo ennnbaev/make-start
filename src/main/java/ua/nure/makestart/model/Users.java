@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 
 import lombok.Data;
 
-import java.util.List;
 import java.util.UUID;
 
 @Data
@@ -28,8 +27,4 @@ public class Users {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "cv_id")
     private Cv cv;
-    @OneToMany(mappedBy = "owner")
-    private List<Project> projects;
-
-
 }

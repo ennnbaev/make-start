@@ -7,6 +7,7 @@ import java.util.Set;
 
 @Data
 public class CvInfoDto {
+    private String id;
     private String description;
     private SeniorityDto seniority;
     private int experienceYears;
