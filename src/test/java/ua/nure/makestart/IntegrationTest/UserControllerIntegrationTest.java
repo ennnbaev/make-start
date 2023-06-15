@@ -7,7 +7,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import ua.nure.makestart.dto.CvCreationDto;
 import ua.nure.makestart.dto.UserRegistrationDto;
 
 import java.nio.file.Files;
@@ -36,8 +35,6 @@ class UserControllerIntegrationTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(userRegistrationDto)))
                 .andExpect(status().isCreated());
-
-
     }
     @Test
     void testGetUserInfo() throws Exception {
